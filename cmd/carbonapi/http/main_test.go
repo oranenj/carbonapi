@@ -167,6 +167,22 @@ func TestFindHandler(t *testing.T) {
 	}
 }
 
+func TestExpandHandler(t *testing.T) {
+	req, rr := setUpRequest(t, "/metrics/expand/?query=f*.b*&format=json")
+	expandHandler(rr, req)
+
+	body := rr.Body.String()
+  expected := `{"results":["foo.bar"]}` + "\n"
+	r := assert.Equal(t, rr.Code, http.StatusOK, "HttpStatusCode should be 200 OK.")
+	if !r {
+		t.Error("HttpStatusCode should be 200 OK.")
+	}
+	r = assert.Equal(t, expected, body, "Http response should be same.")
+	if !r {
+		t.Error("Http response should be same.")
+	}
+}
+
 func TestInfoHandler(t *testing.T) {
 	req, rr := setUpRequest(t, "/info/?target=foo.bar&format=json")
 	infoHandler(rr, req)
