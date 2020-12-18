@@ -172,7 +172,7 @@ func TestExpandHandler(t *testing.T) {
 	expandHandler(rr, req)
 
 	body := rr.Body.String()
-  expected := `{"results":["foo.bar"]}` + "\n"
+	expected := `{"results":["foo.bar"]}` + "\n"
 	r := assert.Equal(t, rr.Code, http.StatusOK, "HttpStatusCode should be 200 OK.")
 	if !r {
 		t.Error("HttpStatusCode should be 200 OK.")

@@ -27,12 +27,12 @@ func expandList(multiGlobs *pbv3.MultiGlobResponse) ([]byte, error) {
 			if strings.HasPrefix(g.Path, "_tag") {
 				continue
 			}
-      matches = append(matches, g.Path)
+			matches = append(matches, g.Path)
 		}
 	}
 
 	err := json.NewEncoder(&b).Encode(struct {
-    Results []string `json:"results"`
+		Results []string `json:"results"`
 	}{
 		Results: matches},
 	)
@@ -91,7 +91,7 @@ func expandHandler(w http.ResponseWriter, r *http.Request) {
 	var pv3Request pbv3.MultiGlobRequest
 
 	pv3Request.Metrics = query
-  pv3Request.StartTime = from64
+	pv3Request.StartTime = from64
 	pv3Request.StopTime = until64
 
 	if len(pv3Request.Metrics) == 0 {
